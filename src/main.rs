@@ -1,16 +1,16 @@
 use std::fs;
 mod tokenizer;
-
-
-//58:05
-//TODO : turen tokens into assembly now
+mod tokentoasm;
 
 fn main() {
 //tokenize code
     let readfile = fs::read_to_string("test.volare").expect("Didnt read");
     let returntokens = tokenizer::tokenize(&readfile);
-    println!("tokenize finished:");
-    println!("{:#?}", returntokens);
+    //println!("tokenize finished:");
+    //println!("{:#?}", returntokens);
+
+    //turn tokens into assembly
+    println!("{}", tokentoasm::token_to_asm(returntokens));
 
 }
 

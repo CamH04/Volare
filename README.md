@@ -5,3 +5,4 @@ Volare is a rust based programming language developed by me :)
 
 
 I hope to port volare into AlbaOS at some point
+i mostly did this project to learn rust
