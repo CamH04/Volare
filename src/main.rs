@@ -10,7 +10,7 @@ fn main() {
     //println!("{:#?}", returntokens);
 
     //turn tokens into assembly
-    println!("{}", tokentoasm::token_to_asm(returntokens));
+    tokentoasm::token_to_asm(returntokens);
 
 }
 
