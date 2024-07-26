@@ -9,12 +9,14 @@ pub fn token_to_asm(tokenvec: Vec<Token>) -> String{
 
     //initing asm file
     let mut asmfile = File::create("volare.asm").expect("error in creating file");
-    asmfile.write_all("global _start\n".as_bytes()).expect("error in writing data");
+    asmfile.write_all("section      .text\n".as_bytes()).expect("error in writing data");
+    asmfile.write_all("global       _start\n".as_bytes()).expect("error in writing data");
     asmfile.write_all("_start:\n".as_bytes()).expect("error in writing data");
     //for later
     let mut output:String = "    mov rdi, ".to_string();
     //acc going through tokens
     for givetoken in tokenvec{
+        //pushing any numeric values to temp string
         if givetoken.value != Option::None{
             let holdvalue:String = givetoken.value.expect("ERROR IN VALUE").to_string();
             output.push_str(&holdvalue);
