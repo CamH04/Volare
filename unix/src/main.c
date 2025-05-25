@@ -24,15 +24,22 @@ int has_vpu_extension(const char *filename) {
     return dot && strcmp(dot, ".vpu") == 0;
 }
 
-void printBuffer(FILE* _file){
+void printFileBuffer(FILE* _file){
     char buffer[256]; // oh no
     while (fgets(buffer, sizeof(buffer), _file)) {
         printf("%s", buffer);
     }
 }
+void printArrayBuffer(){
+    int line_num = 0;
+    char file_line_data[100][100];
+    for (int i = 0; i < line_num; i++) {
+        printf("%s", file_line_data[i]);
+    }
+}
 
 int main(int argc, char *argv[]) {
-    //file checks
+    //pre file checks
     //-------------------------------------------------------------------------
     char* volare_error = "\033[1;31mVolare Compler ERROR: ";
     char* volare_error_terminator = "\033[0m\n";
@@ -45,13 +52,38 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "\033[1;31mVolare Compler ERROR: File must have a .vpu extension\033[0m\n");
         return 1;
     }
+    //-------------------------------------------------------------------------
     FILE* file = fopen(argv[1], "r");
     if(!file){
         perror(strcat(volare_error, "File Not Found"));
         return 1;
     }
-    //-------------------------------------------------------------------------
-    printBuffer(file);
+    //storing each line into array
+    int MAX_LINES = 100;
+    int MAX_LEN = 100;
+    int line_num = 0;
+
+    char file_line_data[MAX_LINES][MAX_LEN];
+
+    while (!feof(file) && !ferror(file)) {
+        if (line_num >= MAX_LINES) {
+            perror(strcat(volare_error, "Max File Length Exeeded"));
+            break;
+        }
+        if (fgets(file_line_data[line_num], MAX_LEN, file) != NULL) {
+            line_num++;
+        }
+    }
+
+    //tokaniseing lines
+
+
+
+
+
+
+
+
     fclose(file);
     return 0;
 }
