@@ -1,0 +1,10 @@
+READ
+READ
+SUB
+JEQ L1
+PRINT "not the same"
+HALT
+
+L1:
+PRINT "the same"
+HALT
